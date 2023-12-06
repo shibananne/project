@@ -1,0 +1,281 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<main id="check_vue">
+
+    <section class="container" style="max-width: 1125px">
+        <h3 class="title-products-latest">Thanh toán</h3>
+        <div class="separator-2 svelte-i2187t"></div>
+        <div class="title-check mb-5 mt-5">
+            <div class="title-check-sub">
+                Giỏ hàng
+            </div>
+        </div>
+        <div v-for="(cart,index) in CartAdd" :key="index">
+            <div class="d-flex cart-items-check justify-content-between mb-5" style="gap:50px">
+                <div class="d-flex align-items-center">
+                    <div class="bg-gray">
+                        <img :src="cart.imgProducts" style="width: 120px; height:auto; object-fit:cover; padding:12px" />
+                    </div>
+                    <div class="d-flex flex-column" style="margin-left: 18px">
+                        <div style="font-size: 16px; font-weight: 700">
+                            {{cart.brandsName}}
+                        </div>
+                        <div style="font-size: 18px; font-weight: 500">
+                            {{cart.nameProduct}}
+                        </div>
+                        <div style="font-size: 12px;opacity: 0.7 ">
+                            {{cart.selectSizeId}}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-around align-items-end">
+
+                    <div class="d-flex flex-column">
+                        <div style="font-size: 26px; color: #262626; font-weight: 700">
+                            {{formatPrice(cart.totalPrices)}}
+
+                        </div>
+                        <div v-if="cart.disPrice != null" class="text-end">
+                            <span style="color:#b1b1b1;font-family: var(--secondary-font);font-weight: 700;font-size: 0.85rem;">
+                                {{formatPrice(cart.disPrice)}}
+
+                            </span>
+                        </div>
+                        <div v-else class="text-end">
+                            <span style="color:#b1b1b1;font-family: var(--secondary-font);font-weight: 700;font-size: 0.85rem;">
+                                {{formatPrice(cart.beforePrice)}}
+
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="">
+                        <div class="d-flex justify-content-between">
+                            <div class="bg-gray" style="margin-right: 32px;">
+                                <i class="fa-regular fa-trash-can" style="padding: 8px; font-size: 26px; cursor:pointer" v-on:click="deleteCart(cart)"></i>
+                            </div>
+                            <div class="qty-container">
+                                <button class="qty-btn-minus btn-light" type="button" v-on:click="decreaseQuantity(cart)"><i class="fa fa-minus"></i></button>
+                                <input type="text" name="qty" :value="cart.quantityCient" readonly class="input-qty" />
+                                <button class="qty-btn-plus btn-light" type="button" v-on:click="increaseQuantity(cart)"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 mb-3" style="border-bottom: 3px solid #f1f1f1;">
+            </div>
+
+        </div>
+        <div class="d-flex flex-column justify-content-center mt-5 discount-code">
+            <button data-testid="discount-code-closed" class="svelte-fdwx38 button-code" v-on:click="openCop" v-if="!isCop">
+                <div>Bạn có mã giảm giá/thẻ quà tặng? Thêm tại đây!</div>
+                <svg width="9" height="15" viewBox="0 0 9 15" fill="none" class="all down svelte-dvmif3" stroke="currentColor">
+                    <path d="M1.84717 13.6074L7.06212 7.60742L1.84717 1.60742" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg> <svg class="fitted-world down svelte-dvmif3" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M17.3999 9L11.3999 15L5.3999 9" stroke="#262626" stroke-width="1.2" transform="rotate(270 12 12)"></path>
+                </svg>
+            </button>
+            <div class="mb-4 discount-code-open" v-if="isCop">
+                Thêm mã giảm giá/thẻ quà tặng
+            </div>
+            <div class="message svelte-p4jm28" data-testid="error" aria-live="assertive" style="" v-if="isEr">Mã không hợp lệ. </div>
+            <form style="margin: 0 180px 1.875rem;" v-if="isCop">
+                <div class="form svelte-1nd16dz d-flex" style="width:100%">
+                    <label class="input-container-2 svelte-1fpsr65" for="input.19">
+                        <div class="flex svelte-1fpsr65">
+                            <div class="grow svelte-1fpsr65">
+                                <div :class="['label-container','svelte-1fpsr65',{ 'label-container': true, focusedC: isFocused }]">
+                                    <div class="label text-input-label bold svelte-1fpsr65 grow font-weight-bold">Mã </div>
+                                </div>
+                                <input v-on:focus="onFocus"
+                                       v-on:blur="onBlur" type="text" id="input.19" v-model="Cop" placeholder="" aria-label="Mã" aria-invalid="false" class="text-field-title-l svelte-1fpsr65">
+                            </div>
+                        </div>
+                    </label>
+                    <button type="button" class="svelte-1y8caig black text-white hover-black large-padding full-width full-height font-base" v-on:click="applyCoupon">
+                        <div class="svelte-1y8caig">Sử dụng</div>
+                    </button>
+                </div>
+            </form>
+
+            <div class="d-flex flex-column bg-gray" style="margin: 0 180px 1.875rem  ;">
+                <div style="padding: 20px;font-size: 16px; color: #262626;    line-height: 3em;">
+                    <div class="d-flex justify-content-between discount-text" v-if="isCop">
+                        <div class="discount-text-titile">
+                            Tổng giảm giá
+                        </div>
+                        <div>
+                            {{formatPrice(discountedPrice)}}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            Giao hàng
+                        </div>
+                        <div>
+                            0 VND
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div style=" font-weight: 700">
+                            Tổng
+                        </div>
+                        <div style=" font-weight: 700">
+                            {{formatPrice(totalPrices)}}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            VAT:
+                        </div>
+                        <div>
+                            0 VND
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="title-check mb-5 mt-5">
+            <div class="title-check-sub">
+                Thông tin của bạn
+            </div>
+        </div>
+        <div class="container mb-4">
+            <div class="row" style="margin:0 136px">
+                
+                <div class="col-md-12 order-md-1">
+                    <h4 class="add-products-check">Địa chỉ giao hàng</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Họ</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Họ" required>
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Tên</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Tên" required>
+
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="email">Email </label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" v-model="Email">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Số điện thoại </label>
+                            <input type="text" class="form-control" id="sdt" placeholder="0912345678" v-model="Phone" maxlength="10">
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="country">Thành phố</label>
+                                <select class="form-control" v-model="selectedCity" v-on:change="getDistricts">
+                                    <option value="" selected>Chọn tỉnh thành</option>
+                                    <option v-for="city in cities" :value="city.code" :key="city.code">{{ city.name }}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="state">Quận/Huyện</label>
+                                <select class="form-control" v-model="selectedDistrict" v-on:change="getWards">
+                                    <option value="" selected>Chọn quận huyện</option>
+                                    <option v-for="district in districts" :value="district.code" :key="district.code">
+                                        {{ district.name }}
+                                    </option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="state">Phường/Xã</label>
+                                <select class="form-control" v-model="selectedWard" v-on:change="printResult">
+                                    <option value="" selected>Chọn phường xã</option>
+                                    <option v-for="ward in wards" :value="ward.code" :key="ward.code">{{ ward.name }}</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Địa chỉ chi tiết</label>
+                            <textarea class="form-control" id="msg" v-model="detailsAddress" rows="3"></textarea>
+                        </div>
+                        <div class="checkbox svelte-mkm555" data-testid="billing-and-shipping-newsletter">
+                            <label class="checkbox svelte-1el70vr" for="input.17">
+                                <span class="widget-container svelte-1el70vr">
+                                    <input type="checkbox" id="input.17" name="checkbox" data-testid="newsletter-signup" class="svelte-1el70vr">
+                                    <span class="square svelte-1el70vr checked"></span>
+                                    <span class="check-container text-white svelte-1el70vr" style="">
+                                    </span>
+                                </span>
+                                <span class="label text-body svelte-1el70vr">
+                                    <div class="label">
+                                        <div class="head svelte-mkm555">Tin tức và giảm giá</div>
+                                        <div class="desc svelte-mkm555">Vâng, tôi muốn nhận tin tức và các chương trình giảm giá qua email &amp; sms.</div>
+                                    </div>
+                                </span>
+                            </label>
+                        </div>
+
+
+                        <hr class="mb-4">
+                        <div class="d-flex  bg-black float-end">
+                            <div style="padding: 12px 24px">
+                                <button class="btn text-white" type="button" v-on:click="ConfirmCart">Xác nhận thanh toán</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="bg-gray p-5">
+        <div class="container-fluid">
+            <h3 class="text-center why">Tại sao bạn chọn chúng tôi?</h3>
+            <div class=" row d-flex align-items-center justify-content-between mt-5">
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Vận chuyển có thể theo dõi
+                    </p>
+                    <p>
+                        Giao hàng miễn phí cho các đơn đặt hàng trên 999000 VND
+                    </p>
+                </div>
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Đa dạng sản phẩm
+                    </p>
+                    <p>
+                        Hơn 15 000 sản phẩm có sẵn
+                    </p>
+                </div>
+                <div class=" col-4 text-center cus-p ">
+                    <p class="text-main-last">
+                        Chính sách hoàn trả thuận tiện
+                    </p>
+                    <p>
+                        Hoàn trả trong vòng 100 ngày
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="~/frontend/js/checkout.js"></script>

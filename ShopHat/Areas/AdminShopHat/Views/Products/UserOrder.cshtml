@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>Quản lý đơn hàng</h1>
+
+<div id="order_products">
+    <div>
+        <table class="table table-bordered" id="order_table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Ảnh sản phẩm</th>
+                    <th>Size sản phẩm</th>
+                    <th>Tổng giá sản phẩm</th>
+                    <th>Địa chỉ khách hàng</th>
+                    <th>Số điện thoại khách hàng</th>
+                    <th>Số lượng</th>
+                    <th>Ngày tạo</th>
+                </tr>
+            </thead>
+            <tbody v-for="(item,index) in dataItems" :key="index">
+                <tr v-for="(product,prIndex) in item.products" :key="prIndex">
+                    <td>{{index + 1}}</td>
+                    <td>{{product.nameProduct}}</td>
+                    <td>
+                        <img :src="product.imgProducts" style="width: 80px; height: auto; object-fit: cover" />
+                    </td>
+                    <td>
+                        {{product.selectSizeId}}
+                    </td>
+                    <td>
+                        {{formatCurrency(product.totalPrices)}}
+                    </td>
+                    <td>
+                        {{product.address}}
+                    </td>
+                    <td>
+                        {{product.phone_Number}}
+                    </td>
+                    <td>
+                        {{product.quantityCient}}
+                    </td>
+                    <td>
+                        {{formatDate(new Date(product.createOrder))}}
+                    </td>
+
+                  
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script src="~/js/admin/admin_order.js"></script>

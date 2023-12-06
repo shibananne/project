@@ -1,0 +1,199 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>Quản lý danh mục tuổi</h1>
+<div id="Admin_age">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Thuộc tính tuổi</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="model-tab" data-bs-toggle="tab" data-bs-target="#model" type="button" role="tab" aria-controls="model" aria-selected="false">Thuộc tính khuôn</button>
+        </li>
+       
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="p-3">
+                <button type="button" class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#exampleModal" v-on:click="resetData">
+                    Thêm mới danh mục tuổi
+                </button>
+            </div>
+            <table class="table table-bordered" id="age_table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Loại danh mục tuổi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in dataItems" :key="index">
+                        <td>{{index + 1}}</td>
+                        <td >{{item.nameAge}}</td>
+
+                        <td style="width:30%">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Edit" v-on:click="getItemsById(item.id)">Sửa</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Delete" v-on:click="getItemsByIdDelete(item.id)">Xóa</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="model" role="tabpanel" aria-labelledby="model-tab">
+            <div class="p-3">
+                <button type="button" class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#exampleModalModel" v-on:click="resetDataRim">
+                    Thêm mới thuộc tính vành               
+                    </button>
+            </div>
+            <table class="table table-bordered" id="rim_table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Loại thuộc tính vành</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in dataItemsRim" :key="index">
+                        <td>{{index + 1}}</td>
+                        <td >{{item.rimName}}</td>
+                      
+                        <td style="width:30%">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditModel" v-on:click="getItemsByIdRim(item.id)">Sửa</button>
+                            <button type="button" class="btn btn-danger"  v-on:click="getItemsByIdDeleteRim(item.id)">Xóa</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+    <div id="main">
+       
+       
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới danh mục tuổi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Loại danh mục tuổi </label>
+                                <input class="form-control" type="text" placeholder="Loại danh mục" aria-label="default input example" v-model="ageName">
+                            </div>
+                           
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="addCategory">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*edit*@
+    <div class="modal fade" id="Edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sửa danh mục tuổi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="resetData">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Loại danh mục tuổi</label>
+                                <input class="form-control" type="text" placeholder="Loại danh mục" aria-label="default input example" v-model="ageName">
+                            </div>
+                           
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="resetData">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="editCategory">Sửa danh mục</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*khuôn*@
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới thuộc tính vành</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Loại thuộc tính vành</label>
+                                <input class="form-control" type="text" placeholder="Loại danh mục" aria-label="default input example" v-model="rimName">
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="addCategoryRim">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*edit*@
+    <div class="modal fade" id="Edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sửa thuộc tính vành</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="resetDataRim">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Loại danh mục tuổi</label>
+                                <input class="form-control" type="text" placeholder="Loại danh mục" aria-label="default input example" v-model="rimName">
+                            </div>
+                          
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="resetDataRim">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="editCategoryRim">Sửa danh mục</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/admin/admin_age.js"></script>

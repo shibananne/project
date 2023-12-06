@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Quản lý mã giảm giá</h1>
+
+<div id="main_coupon">
+    <div class="p-3">
+        <button type="button" class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#exampleModal" v-on:click="resetData">
+            Thêm mới mã
+        </button>
+    </div>
+    <table class="table table-bordered" id="coupon_table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã code</th>
+                <th>Giá trị </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(item,index) in dataCop" :key="index">
+                <td>{{index + 1}}</td>
+                <td>{{item.couponMain}}</td>
+               
+                <td>{{item.contentCop}}%</td>
+
+                <td style="width:30%">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit" v-on:click="getItemsByIdColor(item.id)">Sửa</button>
+                    <button type="button" class="btn btn-danger" v-on:click="getItemsByIdDeleteColor(item.id)">Xóa</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới mã</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Mã code </label>
+                                <input class="form-control" type="text" placeholder="Mã code" aria-label="default input example" v-model="CouponMain">
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label for="formFileSm" class="form-label"> Giá trị code </label>
+                                <input class="form-control" type="number" placeholder="giá trị sẽ được tính theo % số đã nhập" aria-label="default input example" v-model="ContentCop">
+
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="addData">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- Modal -->
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới mã</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="resetData">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Mã code </label>
+                                <input class="form-control" type="text" placeholder="Mã code" aria-label="default input example" v-model="CouponMain">
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label for="formFileSm" class="form-label"> Giá trị code </label>
+                                <input class="form-control" type="number" placeholder="giá trị sẽ được tính theo % số đã nhập" aria-label="default input example" v-model="ContentCop">
+
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="resetData">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="editData">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/admin/admin_coupon.js"></script>

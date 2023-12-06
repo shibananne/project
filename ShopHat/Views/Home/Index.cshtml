@@ -1,0 +1,355 @@
+﻿<main id="main_front">
+
+    <section class="banner container-fluid" v-if="selected === 'main'">
+        <div class="row">
+            <div class="col-6">
+                <div class="image desktop svelte-i2187t"
+                     style="background-image: url('https://a.storyblok.com/f/132956/720x360/a5c8f7b683/department-picker-desktop-aug-2023.jpg/m//0x0:1200x360/filters:quality(75)')">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="actions svelte-i2187t">
+                    <div class="separator svelte-i2187t"></div>
+                    <h3 class="title text-white svelte-i2187t">Chọn trong số hơn 15.000 sản phẩm trong kho</h3>
+                    <div class="subtitle svelte-i2187t">hoặc sáng tạo thiết kế của riêng bạn!</div>
+                    <div class="body text-white svelte-i2187t">Bạn muốn bắt đầu từ đâu?</div>
+                    <div>
+                        <div class="buttons svelte-i2187t">
+                            <div class="department-buttons svelte-i2187t">
+                                <a href="./department/man"
+                                   class="svelte-yo3v3g white text-black hover-gray small-padding font-base"
+                                   v-on:click.prevent="selectSection('man')">
+                                    <div class="svelte-yo3v3g">Nam </div>
+                                </a><a href="./department/woman"
+                                       class="svelte-yo3v3g white text-black hover-gray small-padding font-base" v-on:click.prevent="selectSection('woman')">
+                                    <div class="svelte-yo3v3g">Nữ </div>
+                                </a><a href="./department/kid"
+                                       class="svelte-yo3v3g white text-black hover-gray small-padding font-base" v-on:click.prevent="selectSection('child')">
+                                    <div class="svelte-yo3v3g">Trẻ em </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+    <section class="banner" v-if="selected === 'man'">
+
+        <div>
+            <img src="~/imgmain/banner-nam.jpg" style="width:100%" />
+        </div>
+
+    </section>
+    <section class="banner" v-if="selected === 'woman'">
+
+        <div>
+            <img src="~/imgmain/banner-nu.jpg" style="width:100%" />
+        </div>
+
+    </section>
+    <section class="banner" v-if="selected === 'child'">
+
+        <div>
+            <img src="~/imgmain/banner-child.jpg" style="width:100%" />
+        </div>
+
+    </section>
+    <section id="brands">
+        <div class="mt-5">
+            <h3 class="text-center mb-5 image-list-heading">
+                Mua mũ trực tuyến tại The Bunder - Chuyên sản phẩm mũ
+                nón từ năm 2011
+            </h3>
+            <div class="d-flex justify-content-center gap-15 mt-5">
+                <div class="image-square svelte-a0bdqi" v-for="brands in dataBrand">
+                    <a :href="`/Category/${brands.slug}`">
+                        <div class="inner-image svelte-a0bdqi">
+                            <div class="image-container header-image svelte-14ytt2c">
+                                <picture class="svelte-14ytt2c">
+                                    <img draggable="true"
+                                         :src="brands.imgBrand"
+                                         loading="lazy" style="opacity: 1;width: 70px"
+                                         class="svelte-14ytt2c contain">
+                                </picture>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="image-square-dark dark text-white svelte-a0bdqi">
+                    <div class="last-square-content svelte-a0bdqi">
+                        Xem tất cả {{CountBrand}}+ brands
+                        <div class="more-brands">
+                            <a href="#" class="white text-black hover-gray xsmall-padding full-height font-base">
+                                <div class="svelte-yo3v3g">Xem</div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="two-img" class="mt-5 m-auto">
+
+        <div class="d-flex justify-content-center img-two gap-15">
+            <div class="m-auto">
+                <img src="~/imgmain/banner1.jpg" />
+            </div>
+            <div class="m-auto">
+                <img src="~/imgmain/banner2.jpg" />
+            </div>
+        </div>
+    </section>
+
+    <section id="products_latest">
+        <div class="container">
+            <div class="mb-4 ">
+                <h3 class="title-products-latest">Sản phẩm mới nhất</h3>
+                <div class="separator-2 svelte-i2187t"></div>
+            </div>
+            <div class="d-flex gap-15 justify-content-center">
+               
+                <div class="w-fit">
+                    <div class="svelte-9zad4w position-relative">
+                        <a href="javascript:void(0)" rel="prefetch">
+                            <div class="image-container svelte-14ytt2c cover">
+                                <picture class="svelte-14ytt2c">
+                                    <img draggable="true"
+                                         src="https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/375x499/filters:quality(75)"
+                                         srcset="https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/375x499/filters:quality(75) 375w, https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/750x998/filters:quality(75) 750w, https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/1125x1496/filters:quality(75) 1125w"
+                                         sizes="375px" loading="lazy" style="opacity: 1" class="svelte-14ytt2c"
+                                         fetchpriority="low">
+                                </picture>
+                            </div>
+                            <div style="color:#262626">
+                                <span class="by-who position-absolute">
+                                    By The Bunder
+                                </span>
+                                <span class="text-bellow position-absolute">
+                                    Velvet
+                                    Icons
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-fit">
+                    <div class="svelte-9zad4w position-relative">
+                        <a href="javascript:void(0)" rel="prefetch">
+                            <div class="image-container svelte-14ytt2c cover">
+                                <picture class="svelte-14ytt2c">
+                                    <img draggable="true"
+                                         src="https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/375x499/filters:quality(75)"
+                                         srcset="https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/375x499/filters:quality(75) 375w, https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/750x998/filters:quality(75) 750w, https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/1125x1496/filters:quality(75) 1125w"
+                                         sizes="375px" loading="lazy" style="opacity: 1" class="svelte-14ytt2c"
+                                         fetchpriority="low">
+                                </picture>
+                            </div>
+                            <div style="color:#262626">
+                                <span class="by-who position-absolute">
+                                    By The Bunder
+                                </span>
+                                <span class="text-bellow position-absolute">
+                                    Velvet
+                                    Icons
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-fit">
+                    <div class="svelte-9zad4w position-relative">
+                        <a href="javascript:void(0)" rel="prefetch">
+                            <div class="image-container svelte-14ytt2c cover">
+                                <picture class="svelte-14ytt2c">
+                                    <img draggable="true"
+                                         src="https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/375x499/filters:quality(75)"
+                                         srcset="https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/375x499/filters:quality(75) 375w, https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/750x998/filters:quality(75) 750w, https://a.storyblok.com/f/132956/1000x1329/e6e2a1be00/release-puff-cm-velvet.jpg/m/1125x1496/filters:quality(75) 1125w"
+                                         sizes="375px" loading="lazy" style="opacity: 1" class="svelte-14ytt2c"
+                                         fetchpriority="low">
+                                </picture>
+                            </div>
+                            <div style="color:#262626">
+                                <span class="by-who position-absolute">
+                                    By The Bunder
+                                </span>
+                                <span class="text-bellow position-absolute">
+                                    Velvet
+                                    Icons
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="all-product mt-5 float-end mb-5">
+                <div class="d-flex align-items-center " style="font-weight: 600">
+                    <div>
+                        <p style="color: #f88749;">Xem tất cả mũ lưỡi trai</p>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-chevron-right" style="color: #f88749;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section class="mt-50">
+        <div class="d-flex justify-content-center">
+            <a href="javascript:void(0)">
+                <div class="image-container svelte-14ytt2c unknown-height">
+                    <picture class="svelte-14ytt2c">
+                        <img draggable="true"
+                             src="https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/1440x0/filters:quality(75)"
+                             srcset="https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/768x0/filters:quality(75) 768w, https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/1024x0/filters:quality(75) 1024w, https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/1440x0/filters:quality(75) 1440w, https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/1536x0/filters:quality(75) 1536w, https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/2048x0/filters:quality(75) 2048w, https://a.storyblok.com/f/132956/1440x237/1175b020fb/fw-banner-startpage-desktop.jpg/m/fit-in/2880x0/filters:quality(75) 2880w"
+                             sizes="(min-width: 1440px) 1440px, 100vw" alt="" loading="lazy" style="opacity: 1"
+                             class="svelte-14ytt2c" fetchpriority="low">
+                    </picture>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="clb" class="p-5 mt-5">
+        <div class="">
+            <h3 class="text-center mb-5  image-list-heading-2">
+                ỦNG HỘ ĐỘI BÓNG CỦA BẠN
+            </h3>
+            <div class="d-flex justify-content-center gap-15 mt-5">
+                <div class="img-clb" v-for="clb in dataClb">
+                    <a href="#" rel="prefetch">
+                        <div class="inner-image svelte-a0bdqi">
+                            <div class="image-container header-image svelte-14ytt2c">
+                                <picture class="svelte-14ytt2c">
+                                    <img draggable="true"
+                                         :src="clb.imgCLB"
+                                         sizes="70px" loading="lazy" style="opacity: 1; width: 70px"
+                                         class="svelte-14ytt2c contain">
+                                </picture>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="image-square-dark dark text-white svelte-a0bdqi">
+
+                    <div class="last-square-content svelte-a0bdqi">
+                         {{CountClb}}+ trong cửa hàng
+                        <div class="more-brands">
+                            <a href="/Category/teams" class="white text-black hover-gray xsmall-padding full-height font-base">
+                                <div class="svelte-yo3v3g">Xem</div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="products_category" class="mt-5">
+        <div class="container">
+            <div class="mb-4">
+                <h3 class="title-products-latest">Các danh mục phổ biến</h3>
+                <div class="separator-2 svelte-i2187t"></div>
+            </div>
+            <div class="row">
+                <div class="col-4 mb-3 m-custom" v-for="sub in dataSub">
+                    <a :href="`/Category/${sub.slug}`">
+                        <div class="d-flex justify-content-between align-items-center bg-gray cate-main">
+                            <div class="cate-name">
+                                {{sub.nameSub}}
+                            </div>
+                            <div>
+                                <img :src="sub.imgSub" />
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
+    <section>
+        <div class="mb-4 container">
+            <h3 class="title-products-latest">Theo dõi sản phẩm</h3>
+            <div class="separator-2 svelte-i2187t"></div>
+
+        </div>
+    </section>
+    <section class="mt-3 mb-4">
+        <div class="container" style="max-width: 1140px;">
+            <div class="row follow-products ">
+                <div class="col-3 mb-1 " v-for="products in dataProducts">
+                    <div style="cursor:pointer">
+                        <a :href=`/Details/${products.slug}`>
+                            <img :src="products.imgProducts" />
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center more">
+            <span v-on:click="loadMoreProducts">
+                +
+            </span>
+        </div>
+    </section>
+
+    <section>
+        <div class="rich-text svelte-1xaapq8 container">
+            <h3>The Bunder - Thế giới mũ</h3>
+            <p v-html="AboutMain">
+
+            </p>
+        </div>
+    </section>
+
+
+    <section class="bg-gray p-5">
+        <div class="container-fluid">
+            <h3 class="text-center why">Tại sao bạn chọn chúng tôi?</h3>
+            <div class=" row d-flex align-items-center justify-content-between mt-5">
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Vận chuyển có thể theo dõi
+                    </p>
+                    <p>
+                        Giao hàng miễn phí cho các đơn đặt hàng trên 999000 VND
+                    </p>
+                </div>
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Đa dạng sản phẩm
+                    </p>
+                    <p>
+                        Hơn 15 000 sản phẩm có sẵn
+                    </p>
+                </div>
+                <div class=" col-4 text-center cus-p ">
+                    <p class="text-main-last">
+                        Chính sách hoàn trả thuận tiện
+                    </p>
+                    <p>
+                        Hoàn trả trong vòng 100 ngày
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="~/frontend/js/main.js" asp-append-version="true"></script>

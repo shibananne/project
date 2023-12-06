@@ -1,0 +1,330 @@
+﻿@model ShopHat.Models.ProductsViewModels.ProductsCRUD
+
+@using ShopHat.Services
+
+<main id="details_vue" class="mt-4">
+    <input type="hidden" id="brandsId" value="@Model.BrandId" />
+    <input type="hidden" id="productId" value="@Model.ID" />
+    <input type="hidden" id="sizeId" value="@Model.SizeId" />
+    <input type="hidden" id="product_number" value="@Model.ProductNumber" />
+    <input type="hidden" id="product_slug" value="@Model.SlugBrand" />
+    <section id="thumbnail-image-main" class="container">
+        <div class="row container">
+            <div class="col-6" style=" position: sticky;top: 0;height: max-content;">
+                <div class="text-head d-flex">
+                    <a href="/" class="base"> Trang chủ </a> <span style="margin: 0 8px">/</span>   <a href="#" class="cate-base">@Model.CateName </a> <span style="margin: 0 8px">/</span><a href="#" class="base-name">@Model.NameProduct </a>
+                </div>
+                <div class="d-flex">
+                    <ul class="thumb">
+                        @if (Model.ImgFullList != null)
+                        {
+                            @foreach (var pr in Model.ImgFullList)
+                            {
+                                <li>
+                                    <a href="@pr" target="imgBox">
+                                        <picture>
+                                            <img src="@pr" alt="Feathers" height="64" width="96">
+                                        </picture>
+                                    </a>
+                                </li>
+
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Model.ImgProducts" target="imgBox">
+                                    <picture>
+                                        <img src="@Model.ImgProducts" alt="Feathers" height="64" width="96">
+                                    </picture>
+                                </a>
+                            </li>
+                        }
+
+
+                    </ul>
+
+                    <div class="imgBox d-flex align-items-center justify-content-center position-relative">
+                        <div class="newsImg position-absolute">
+                            <p>
+                                Mới
+
+                            </p>
+                        </div>
+                        <div class="newsImgBrand position-absolute">
+                            <img src="@Model.BrandIcon" />
+                        </div>
+                        <picture class="box-img">
+                            <img src="@Model.ImgProducts" alt="Product image">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 position-relative">
+                <div class="brands-text-details">
+                    @Model.BrandsName
+                </div>
+                <div class="mb-5 name-text-details">
+                    @Model.NameProduct
+                </div>
+                <div class="mb-3">
+                    @if (Model.DisPrice != null)
+                    {
+                        <div>
+                            <p class="price-detail">@Model.DisPrice.ToString().FormatVND() <span style="margin-left: 12px" class="price-detail-dis">@Model.BeforePrice.ToString().FormatVND()</span></p>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div>
+                            <p class="price-detail-main">@Model.BeforePrice.ToString().FormatVND() </p>
+                        </div>
+                    }
+                </div>
+                <div class="color-products">
+                    <input type="hidden" id="colorNameId" value="@Model.ColorName" />
+                    Màu sắc : <span class="model-color">{{currentColorName}}</span>
+                </div>
+                <div class="outer-thumbs-container d-flex gap-15 mb-5">
+                    <div class="thumbs-container svelte-1mh273i position-relative thumb" v-for="(productsColor,index) in dataProductColor" :key="index" v-on:mouseover="currentColorName = productsColor.ColorName">
+
+                        <a :href="`/Details/${productsColor.Slug}`" class="product-thumb svelte-3rm9xm pad overlay can-be-active show-desktop">
+                            <div class="image-container svelte-1atz8vk">
+                                <picture class="svelte-1atz8vk is-loaded">
+                                    <img draggable="true" :src="productsColor.ImgProducts" sizes="(min-width: 768px) 72px, 56px" loading="lazy" style="opacity: 1;width:auto;height: 70px;object-fit:cover" class="svelte-1atz8vk">
+                                </picture>
+                            </div>
+                        </a>
+                    </div>
+                   
+                </div>
+                <div>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" v-model="SelectSize">
+                        <option selected>Chọn size</option>
+                        <option v-for="size in filteredSizes" :value="size.id">{{size.nameSize}}</option>
+                    </select>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="add-to-cart">
+                        <div class="add-more d-flex justify-content-center" v-on:click="dataHeartCart()">
+                            <a href="javascript:void(0)">Thêm vào giỏ</a>
+
+                        </div>
+                    </div>
+
+                    <div class="heart-cart">
+                        <i class="fa-regular fa-heart " style="cursor: pointer;"></i>
+                    </div>
+                </div>
+
+                <div class="indide mt-3 p-10">
+                    <div class="d-flex justify-content-center align-items-center ">
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            Có hàng, có sẵn để giao hàng ngay lập tức
+                        </div>
+                    </div>
+
+                </div>
+                <div class="check-list mt-3">
+                    <ul>
+                        <li class="mb-3">
+                            <i class="fa-solid fa-check"></i>
+
+                            Giao hàng miễn phí cho các đơn đặt hàng trên 999000 VND
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa-solid fa-check"></i>
+
+                            Vận chuyển có thể theo dõi
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa-solid fa-check"></i>
+
+                            Hoàn trả trong vòng 100 ngày
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                    <div class="accordion-item" style="border-top: 2px solid rgb(241, 241, 241)">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Chất liệu & chăm sóc
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="sale-products">
+                                Chất liệu: <span>@Model.Material</span>
+                            </div> 
+                            <div class="sale-products">
+                                Tư vấn chăm sóc: <span>Giặt tay</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Thông tin sản phẩm
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="sale-products">
+                                Thương hiệu: <span><a href="#">@Model.BrandsName</a> </span>
+                            </div>
+                            <div class="sale-products">
+                                Giải đấu: <span><a href="#">@Model.ClbName</a></span>
+                            </div>
+                            <div class="sale-products">
+                                Đội: <span><a href="#">@Model.ClbName</a></span>
+                            </div>
+                            <div class="sale-products">
+                                Màu sắc: <span>@Model.ColorName</span>
+                            </div>
+                            <div class="sale-products">
+                                Loại: <span>@Model.CateName</span>
+                            </div>
+                            <div class="sale-products">
+                                Số hiệu sản phẩm: <span >@Model.ProductNumber</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="accordion-item" style="border-bottom: 2px solid rgb(241, 241, 241)" v-on:click="redirect()">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <a href="javascript:void(0)"  class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Duyệt @Model.BrandsName 
+                            </a>
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="mt-5 container">
+        <h3 class="text-center product-more-line">Sản phẩm liên quan</h3>
+        <div class="row">
+            <div class="col-3" v-for="prR in dataProducts">
+                <a :href="`/Details/${prR.slug}`" style="cursor:pointer">
+                    <div class="d-flex flex-column text-more same">
+                        <div class="bg-gray">
+                            <img :src="prR.imgProducts" />
+                        </div>
+                        <div class="brands-text mt-2">
+                            {{prR.brandsName}}
+
+                        </div>
+                        <div class="name-text">
+                            {{prR.nameProduct}}
+
+                        </div>
+                        <div class="d-flex">
+                            <div class="price-text">
+                                {{formatPrice(prR.disPrice)}}
+
+                            </div>
+                            <div class="real-text">
+                                {{formatPrice(prR.beforePrice)}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center flex-column mt-5">
+            <div class="viewed-text">
+                Bạn đã xem {{viewedProducts}}/{{CountProducts}} sản phẩm
+            </div>
+            <div class="more-line">
+                <div style="left: 0%;width: 0%;" class="bellow-line"></div>
+            </div>
+            <div>
+                <button class="mt-3 mb-5 btn-more-details" v-on:click="loadMore">
+                    <div class="more-text">
+                        Tải thêm
+
+                    </div>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="bg-gray p-5">
+        <div class="container-fluid m-100">
+            <h3 class="text-center why">Tại sao bạn chọn chúng tôi?</h3>
+            <div class=" row d-flex align-items-center justify-content-between mt-5">
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Vận chuyển có thể theo dõi
+                    </p>
+                    <p>
+                        Giao hàng miễn phí cho các đơn đặt hàng trên 999000 VND
+                    </p>
+                </div>
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Đa dạng sản phẩm
+                    </p>
+                    <p>
+                        Hơn 15 000 sản phẩm có sẵn
+                    </p>
+                </div>
+                <div class=" col-4 text-center cus-p ">
+                    <p class="text-main-last">
+                        Chính sách hoàn trả thuận tiện
+                    </p>
+                    <p>
+                        Hoàn trả trong vòng 100 ngày
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let thumbnail = document.querySelectorAll('.thumb a');
+        let box = document.querySelector('.box-img img');
+
+        thumbnail.forEach(thumbnail => {
+            thumbnail.addEventListener('mouseover', (event) => {
+                event.preventDefault();
+
+                thumbnail.style.borderBottom = '0.125rem solid #f88749';
+
+
+                let imgElement = thumbnail.querySelector('img');
+                if (imgElement) {
+                    box.setAttribute('src', imgElement.getAttribute('src'));
+                }
+            });
+
+            thumbnail.addEventListener('mouseout', () => {
+                thumbnail.style.borderBottom = '';
+            });
+        });
+    });
+
+    function setImgBoxHeight() {
+        let thumbHeight = document.querySelector('.thumb').offsetHeight;
+
+        document.querySelector('.imgBox').style.height = thumbHeight + 'px';
+    }
+
+    window.onload = setImgBoxHeight;
+
+    window.onresize = setImgBoxHeight;
+
+    
+
+</script>
+<script src="~/frontend/js/details.js" asp-append-version="true"></script>

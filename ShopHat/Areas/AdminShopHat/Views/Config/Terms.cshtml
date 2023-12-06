@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1 class="mb-3">Chính sách điều khoản</h1>
+<div id="edit_terms">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Lưu ý nếu không hiển thị trình soạn thảo hãy bấm ctrl + shift + r
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <textarea id="editor" v-model="ckName">
+    </textarea>
+
+    <button class="btn btn-success" v-on:click="AddData">Lưu</button>
+</div>
+<script src="~/js/config_ckeditor.js"></script>
+<script>
+    var edit_terms = new Vue({
+        el: '#edit_terms',
+        data: {
+            id: 0,
+            ckName: "",
+            editor: "",
+            CateItems: [],
+            PrPath: null,
+            imageFile: null,
+            previewImage: null,
+            uploadedImage: null,
+            CateJson: [],
+            DataMain: [],
+            previewVideo: null,
+            Terms: "",
+
+        },
+        watch: {
+            ckName(vl) {
+            }
+        },
+        mounted() {
+            this.initData();
+
+
+        },
+        beforeDestroy() {
+            if (this.editor) {
+                this.editor.destroy();
+            }
+        },
+        methods: {
+            initData() {
+                $('#preloader').fadeIn();
+
+                axios.get(`/Config/GetTermsPr`)
+                    .then((response) => {
+                        this.Terms = response.data.terms;
+                        return Promise.resolve();
+                    }).then(() => {
+                        configureCKEditor('#editor', this, this.Terms);
+
+                    })
+                $('#preloader').fadeOut();
+
+
+
+            },
+            async AddData() {
+                try {
+                    const formData = new FormData();
+                    formData.append('Terms', this.ckName);
+                    formData.append('idMain', 1);
+
+
+                    await axios.post('/Config/AddTerms', formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công',
+                        text: 'Đã lưu thành công',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload();
+                        }
+                    });
+                } catch (error) {
+                    console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Đã có lỗi xảy ra',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            },
+        }
+    });
+
+
+</script>

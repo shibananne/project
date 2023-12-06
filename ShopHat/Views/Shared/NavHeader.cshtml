@@ -1,0 +1,470 @@
+﻿@*
+
+<style>
+    .activeMain {
+        border-bottom: 3px solid #f88749;
+    }
+</style>
+<div class="nav-container svelte-1xt9nrt position-relative" id="nav_header_vue">
+    <nav  :class="['svelte-1xt9nrt','position-relative',{ fixedNav: !isNav }]">
+        <div class="nav-content svelte-1xt9nrt" >
+            <ul class="svelte-1xt9nrt">
+                <li class="svelte-1xt9nrt " id="open-cate-1" data-target="#cate-1"
+                    data-opacity="opacity-layer">
+                    <a href="/Category/new-in-stock" class="svelte-1xt9nrt">Mới</a>
+                </li>
+
+                <li class="svelte-1xt9nrt hover-trigger" data-target="#cate-2" data-opacity="opacity-layer">
+                    <a href="#" class="svelte-1xt9nrt">Mũ lưỡi trai</a>
+                </li>
+                <li class="svelte-1xt9nrt hover-trigger" data-target="#cate-5">
+                    <a href="#" class="svelte-1xt9nrt">Mũ beanie</a>
+                </li>
+                <li class="svelte-1xt9nrt hover-trigger" data-target="#cate-6">
+                    <a href="#" class="svelte-1xt9nrt">Mũ</a>
+                </li>
+                <li class="svelte-1xt9nrt hover-trigger" data-target="#cate-3">
+                    <a href="/Category/teams" class="svelte-1xt9nrt">Đội bóng</a>
+                </li>
+                <li class="svelte-1xt9nrt">
+                    <a href="/Category/teams" class="svelte-1xt9nrt hover-trigger" data-target="#cate-4">Thương hiệu</a>
+                </li>
+                <li class="svelte-1xt9nrt">
+                    <a href="/exclusives" class="svelte-1xt9nrt">Độc ​​quyền</a>
+                </li>
+                <li class="svelte-1xt9nrt">
+                    <a href="/Category/sale" class="svelte-1xt9nrt">Giảm Giá</a>
+                </li>
+                <li class="svelte-1xt9nrt">
+                    <a href="#" class="svelte-1xt9nrt">Shop Instagram</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="opacity" id="opacity-layer"></div>
+    <div class="container category-main main-head position-absolute" id="cate-2">
+        <div class="category">
+            <div class="d-flex justify-content-between align-items-center align-content-center">
+                <div class="title-category">
+                    <h3 class="title-main">Mũ lưỡi trai</h3>
+                    <div class="separator svelte-i2187t"></div>
+                </div>
+                <div class="three-button d-flex align-items-center align-content-center ">
+                    <div class="top-list">
+                        <a href="/Category/top-list">Top List</a>
+                    </div>
+                    <div class="news">
+                        <a href="/Category/new-in-stock">Mới</a>
+                    </div>
+                    <div class="sales">
+                        <a href="/Category/sale">Giảm giá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 " v-for="sub in dataCate">
+                            <div class="position-relative">
+                                <a :href=`/Category/${sub.slug}`>
+                                    <img :src="sub.imgSub" />
+                                    <div class="position-absolute text-white" style=" top: 39px;left: 50%;transform: translate(-50%, -50%);width: max-content; font-size:12px;font-weight:700">
+                                        {{sub.nameSub}}
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="banner-menu-1 position-relative">
+                                <img src="~/imgmain/filters_quality(75).webp" />
+                                <div class=" banner-img position-absolute">
+                                    <div class="text-next">
+                                        Hatstore exclusive
+                                    </div>
+
+                                </div>
+                                <div class="icon position-absolute">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="banner-menu-1 position-relative">
+                                <img src="~/imgmain/filters_quality(75).webp" />
+                                <div class=" banner-img position-absolute">
+                                    <div class="text-next">
+                                        Hatstore exclusive
+                                    </div>
+
+                                </div>
+                                <div class="icon position-absolute">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="next-page">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <a href="/Category/mu-luoi-trai">
+                            <p>Xem tất cả mũ lưỡi trai</p>
+
+                        </a>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-chevron-right" style="color: #f88749;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container category-main main-head position-absolute" id="cate-5" style="display: none">
+        <div class="category">
+            <div class="d-flex justify-content-between align-items-center align-content-center">
+                <div class="title-category">
+                    <h3 class="title-main">
+                        Mũ beanie
+                    </h3>
+                    <div class="separator svelte-i2187t"></div>
+                </div>
+                <div class="three-button d-flex align-items-center align-content-center ">
+                    <div class="top-list">
+                        <a href="/Category/top-list">Top List</a>
+                    </div>
+                    <div class="news">
+                        <a href="/Category/new-in-stock">Mới</a>
+                    </div>
+                    <div class="sales">
+                        <a href="/Category/sale">Giảm giá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 " v-for="sub3 in dataCate2">
+                            <div class="position-relative">
+                                <a :href=`/Category/${sub3.slug}`>
+                                    <img :src="sub3.imgSub" />
+                                    <div class="position-absolute text-white" style=" top: 39px;left: 50%;transform: translate(-50%, -50%);width: max-content; font-size:12px;font-weight:700">
+                                        {{sub3.nameSub}}
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="banner-menu-1 position-relative">
+                                <img src="~/imgmain/filters_quality(75).webp" />
+                                <div class=" banner-img position-absolute">
+                                    <div class="text-next">
+                                        Hatstore exclusive
+                                    </div>
+
+                                </div>
+                                <div class="icon position-absolute">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="banner-menu-1 position-relative">
+                                <img src="~/imgmain/filters_quality(75).webp" />
+                                <div class=" banner-img position-absolute">
+                                    <div class="text-next">
+                                        Hatstore exclusive
+                                    </div>
+
+                                </div>
+                                <div class="icon position-absolute">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="next-page">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <a href="/Category/mu-luoi-trai">
+                            <p>Xem tất cả mũ beanie</p>
+
+                        </a>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-chevron-right" style="color: #f88749;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container category-main main-head position-absolute" id="cate-6" style="display: none">
+        <div class="category">
+            <div class="d-flex justify-content-between align-items-center align-content-center">
+                <div class="title-category">
+                    <h3 class="title-main">
+                        Mũ
+                    </h3>
+                    <div class="separator svelte-i2187t"></div>
+                </div>
+                <div class="three-button d-flex align-items-center align-content-center ">
+                    <div class="top-list">
+                        <a href="/Category/top-list">Top List</a>
+                    </div>
+                    <div class="news">
+                        <a href="/Category/new-in-stock">Mới</a>
+                    </div>
+                    <div class="sales">
+                        <a href="/Category/sale">Giảm giá</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 " v-for="sub2 in dataCate3">
+                            <div class="position-relative">
+                                <a :href=`/Category/${sub2.slug}`>
+                                    <img :src="sub2.imgSub" />
+                                    <div class="position-absolute text-white" style=" top: 39px;left: 50%;transform: translate(-50%, -50%);width: max-content; font-size:12px;font-weight:700">
+                                        {{sub2.nameSub}}
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="banner-menu-1 position-relative">
+                                <img src="~/imgmain/filters_quality(75).webp" />
+                                <div class=" banner-img position-absolute">
+                                    <div class="text-next">
+                                        Hatstore exclusive
+                                    </div>
+
+                                </div>
+                                <div class="icon position-absolute">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="banner-menu-1 position-relative">
+                                <img src="~/imgmain/filters_quality(75).webp" />
+                                <div class=" banner-img position-absolute">
+                                    <div class="text-next">
+                                        Hatstore exclusive
+                                    </div>
+
+                                </div>
+                                <div class="icon position-absolute">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="next-page">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <a href="/Category/mu-luoi-trai">
+                            <p>Xem tất cả mũ </p>
+
+                        </a>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-chevron-right" style="color: #f88749;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container category-main main-head custom-cate3 position-absolute" style="display:none" id="cate-3">
+        <div class="category">
+            <div class="d-flex justify-content-between align-items-center align-content-center">
+                <div class="title-category">
+                    <h3 class="title-main">Đội bóng</h3>
+                    <div class="separator svelte-i2187t"></div>
+                </div>
+
+
+            </div>
+
+            <div>
+                <div class="d-flex gap-15">
+                    <div v-for="(mainClb, index) in dataClb"
+                         :key="mainClb.nameMainCLB"
+                         v-on:mouseover="mouseOver(mainClb)"
+                         :class="{activeMain: mainClb.nameMainCLB === (activeMainClb ? activeMainClb.nameMainCLB : '')}"
+                    style="cursor: pointer"
+                    >
+                        <div class="d-flex flex-row bg-gray align-items-center" style="cursor:pointer" v-on:click="categoryDetailsTeam(mainClb)">
+                            <div style="padding: 12px 32px;">
+                                {{ mainClb.nameMainCLB }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div v-if="activeMainClb" class="mt-5">
+                    <div class="d-flex gap-40 align-items-center">
+                        <div v-for="clbMainTwo in activeMainClb.prClbs"
+                             :key="clbMainTwo.id"
+                             class="col-3"
+                             style="border-top: 2px solid #f1f1f1; border-bottom: 1px solid #f1f1f1">
+                            <div class="d-flex flex-row align-items-center mt-3 mb-3" style="cursor:pointer" v-on:click="categoryDetails(clbMainTwo)">
+                              
+                                <div>
+                                    <img :src="clbMainTwo.imgCLB"
+                                         :alt="clbMainTwo.nameCLB"
+                                         class="clb-image"
+                                         style="object-fit:cover; width: auto;height: 30px;" />
+                                </div>
+
+                                <div class="clb-name" style="margin-left: 20px">{{ clbMainTwo.nameCLB }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="next-page mt-5">
+            <div class="d-flex align-items-center">
+                <div>
+                    <a href="/Category/mu-luoi-trai">
+                        <p>Xem tất cả mũ lưỡi trai</p>
+
+                    </a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-chevron-right" style="color: #f88749;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container category-main main-head custom-cate-4  position-absolute" style="display:none" id="cate-4">
+        <div class="category">
+            <div class="d-flex justify-content-between align-items-center align-content-center">
+                <div class="title-category">
+                    <h3 class="title-main">Thương hiệu</h3>
+                    <div class="separator svelte-i2187t"></div>
+                </div>
+
+
+            </div>
+            <div class="mt-3">
+                <div class="row">
+                    <div class="col-md-6" >
+                        <div class="row">
+                            <div class="col-6 mb-3" v-for="brands in dataBrandNews">
+                                <div class="d-flex flex-column">
+                                    <a :href="`/Category/${brands.slug}`" style="color: #262626; font-size:14px">
+                                        <div>
+                                            {{brands.nameBrand}}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="banner-menu-1 position-relative">
+                                    <img src="~/imgmain/filters_quality(75).webp" />
+                                    <div class=" banner-img position-absolute">
+                                        <div class="text-next">
+                                            Hatstore exclusive
+                                        </div>
+
+                                    </div>
+                                    <div class="icon position-absolute">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="banner-menu-1 position-relative">
+                                    <img src="~/imgmain/filters_quality(75).webp" />
+                                    <div class=" banner-img position-absolute">
+                                        <div class="text-next">
+                                            Hatstore exclusive
+                                        </div>
+
+                                    </div>
+                                    <div class="icon position-absolute">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            
+
+
+
+        </div>
+
+        <div class="next-page mt-5 mb-3">
+            <div class="d-flex align-items-center">
+                <div>
+                    <a href="/Category/mu-luoi-trai">
+                        <p>Xem tất cả thương hiệu</p>
+
+                    </a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-chevron-right" style="color: #f88749;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-40 mt-2 justify-content-sm-center">
+            <div v-for="(brandImg, index) in dataBrandNews" v-if="index < 7">
+                <img :src="brandImg.imgBrand" style="object-fit:cover; height: 70px; width: auto" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/frontend/js/categorynav.js" asp-append-version="true"></script>*@

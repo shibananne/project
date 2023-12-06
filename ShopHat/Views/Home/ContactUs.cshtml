@@ -1,0 +1,71 @@
+﻿<style>
+    .banner-us {
+        background-color: #f1f1f1;
+        background-image: url('/imgmain/banner.jpg');
+        background-position: left top;
+        background-size: auto;
+        background-repeat: repeat;
+    }
+</style>
+<main id="main_terms" class="p-50">
+    <section id="banner-contacts mb-5">
+        <div class="banner-us">
+            <div class="text-center contact-text">
+                <h2> Liên hệ chúng tôi</h2>
+
+            </div>
+        </div>
+    </section>
+
+    <partial name="ContactMain" />
+
+    <section class="mb-3">
+        <div v-html="AboutPage" class="terms mt-5">
+        </div>
+    </section>
+    <section class="bg-gray p-5">
+        <div class="container-fluid m-100">
+            <h3 class="text-center why">Tại sao bạn chọn chúng tôi?</h3>
+            <div class=" row d-flex align-items-center justify-content-between mt-5">
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Vận chuyển có thể theo dõi
+                    </p>
+                    <p>
+                        Giao hàng miễn phí cho các đơn đặt hàng trên 999000 VND
+                    </p>
+                </div>
+                <div class=" col-4 text-center b-r cus-p">
+                    <p class="text-main-last">
+                        Đa dạng sản phẩm
+                    </p>
+                    <p>
+                        Hơn 15 000 sản phẩm có sẵn
+                    </p>
+                </div>
+                <div class=" col-4 text-center cus-p ">
+                    <p class="text-main-last">
+                        Chính sách hoàn trả thuận tiện
+                    </p>
+                    <p>
+                        Hoàn trả trong vòng 100 ngày
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<script>
+    var main_terms = new Vue({
+        el: '#main_terms',
+        data: {
+            Terms: "",
+        },
+        created() {
+            EventBus.$on('TermsPage', (value) => {
+                this.Terms = value;
+            });
+        },
+    });
+</script>

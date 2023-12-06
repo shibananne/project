@@ -1,0 +1,128 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>Quản lý danh mục thương hiệu</h1>
+<div id="Admin_Brands">
+
+    <div id="main">
+        <div class="p-3">
+            <button type="button" class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#exampleModal" v-on:click="resetData">
+                Thêm mới thương hiệu
+            </button>
+        </div>
+        <table class="table table-bordered" id="Brands_table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên thương hiệu</th>
+                    <th>Icon thương hiệu</th>
+                    <th>Slug </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in dataSubItems" :key="index">
+                    <td>{{index + 1}}</td>
+                    <td >{{item.nameBrand}}</td>
+                    <td>
+                        <img :src="item.imgBrand" style="width: 80px; height: auto; object-fit:cover" />
+                    </td>
+                    <td >{{item.slug}}</td>
+
+
+                    <td style="width:30%">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Edit" v-on:click="getItemsById(item.id)">Sửa</button>
+                        <button type="button" class="btn btn-danger" v-on:click="getItemsByIdDelete(item.id)">Xóa</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới thương hiệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Tên thương hiệu </label>
+                                <input class="form-control" type="text" placeholder="Tên danh mục" aria-label="default input example" v-model="NameBrands">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Slug  </label>
+                                <input class="form-control" type="text" :value="Slug" placeholder="Slug được tạo tự động" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFileSm" class="form-label"> Chọn Icon </label>
+                                <input type="file" ref="PrPath" v-on:change="onFileChange" accept="image/*">
+
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-label"> Icon xem trước </div>
+                                <img :src="previewImage" alt="" style="width:50%" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="addCategory">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*edit*@
+    <div class="modal fade" id="Edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl modal-fullscreen ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sửa thương hiệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="resetData">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Tên thương hiệu </label>
+                                <input class="form-control" type="text" placeholder="Tên danh mục" aria-label="default input example" v-model="NameBrands">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Slug </label>
+                                <input type="text" class="form-control" :value="Slug" placeholder="Slug được tạo tự động" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFileSm" class="form-label"> Chọn Icon </label>
+                                <input type="file" ref="PrPath1" v-on:change="onFileChange" accept="image/*">
+
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-label"> Icon xem trước </div>
+                                <img :src="previewImage" alt="" style="width:50%" />
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-label"> Icon đang có </div>
+                                <img :src="imageSubCategory" alt="" style="width:50%" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="resetData">Đóng</button>
+                    <button type="button" class="btn btn-primary" v-on:click="editCategory">Sửa </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/admin/admin_brands.js"></script>

@@ -1,0 +1,147 @@
+﻿@model ShopHat.Models.ProductsViewModels.ProductsCRUD
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>ProductsCRUD</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameProduct" class="control-label"></label>
+                <input asp-for="NameProduct" class="form-control" />
+                <span asp-validation-for="NameProduct" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slug" class="control-label"></label>
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BeforePrice" class="control-label"></label>
+                <input asp-for="BeforePrice" class="form-control" />
+                <span asp-validation-for="BeforePrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisPrice" class="control-label"></label>
+                <input asp-for="DisPrice" class="form-control" />
+                <span asp-validation-for="DisPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CateId" class="control-label"></label>
+                <input asp-for="CateId" class="form-control" />
+                <span asp-validation-for="CateId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SizeId" class="control-label"></label>
+                <input asp-for="SizeId" class="form-control" />
+                <span asp-validation-for="SizeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubId" class="control-label"></label>
+                <input asp-for="SubId" class="form-control" />
+                <span asp-validation-for="SubId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductsCount" class="control-label"></label>
+                <input asp-for="ProductsCount" class="form-control" />
+                <span asp-validation-for="ProductsCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quanlity" class="control-label"></label>
+                <input asp-for="Quanlity" class="form-control" />
+                <span asp-validation-for="Quanlity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductChildId" class="control-label"></label>
+                <input asp-for="ProductChildId" class="form-control" />
+                <span asp-validation-for="ProductChildId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label"></label>
+                <input asp-for="BrandId" class="form-control" />
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeagueID" class="control-label"></label>
+                <input asp-for="LeagueID" class="form-control" />
+                <span asp-validation-for="LeagueID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CLBID" class="control-label"></label>
+                <input asp-for="CLBID" class="form-control" />
+                <span asp-validation-for="CLBID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorID" class="control-label"></label>
+                <input asp-for="ColorID" class="form-control" />
+                <span asp-validation-for="ColorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material" class="control-label"></label>
+                <input asp-for="Material" class="form-control" />
+                <span asp-validation-for="Material" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductCare" class="control-label"></label>
+                <input asp-for="ProductCare" class="form-control" />
+                <span asp-validation-for="ProductCare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgeID" class="control-label"></label>
+                <input asp-for="AgeID" class="form-control" />
+                <span asp-validation-for="AgeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BacksideId" class="control-label"></label>
+                <input asp-for="BacksideId" class="form-control" />
+                <span asp-validation-for="BacksideId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelID" class="control-label"></label>
+                <input asp-for="ModelID" class="form-control" />
+                <span asp-validation-for="ModelID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RimID" class="control-label"></label>
+                <input asp-for="RimID" class="form-control" />
+                <span asp-validation-for="RimID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductNumber" class="control-label"></label>
+                <input asp-for="ProductNumber" class="form-control" />
+                <span asp-validation-for="ProductNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>
